@@ -17,6 +17,7 @@ limitations under the License.
 package controller
 
 import (
+	"github.com/crossplane-contrib/provider-argocd/pkg/controller/projects"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/crossplane-runtime/pkg/logging"
@@ -31,6 +32,7 @@ func Setup(mgr ctrl.Manager, l logging.Logger) error {
 	for _, setup := range []func(ctrl.Manager, logging.Logger) error{
 		config.Setup,
 		repositories.SetupRepository,
+		projects.SetupProject,
 	} {
 		if err := setup(mgr, l); err != nil {
 			return err
